@@ -1,5 +1,7 @@
 {
   "books": "https://www.anapioficeandfire.com/api/books",
   "characters": "https://www.anapioficeandfire.com/api/characters",
-  "houses": "https://www.anapioficeandfire.com/api/houses"
+  "houses": "https://www.anapioficeandfire.com/api/houses",
+  "books3": "https://www.anapioficeandfire.com/api/books/3",
+  "houses2": "https://www.anapioficeandfire.com/api/houses/2"
 }
