@@ -7,3 +7,4 @@ const getListOfRestEndPoint = () => request(`https://www.anapioficeandfire.com/a
 const getBooks = () => request(`https://www.anapioficeandfire.com/api/books`)
 
 export {getListOfRestEndPoint, getBooks}
+

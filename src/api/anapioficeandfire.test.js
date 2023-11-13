@@ -1,29 +1,40 @@
-/* eslint-env jest */
-
-const apiIceAndFire = require('./anapioficeandfire')
+ apiIceAndFire = require('./anapioficeandfire');
+const mockData = require('./apiMockData.json');
 
 jest.mock('./anapioficeandfire', () => {
-    const originalModule = jest.requireActual('./anapioficeandfire');
-    const resp = require('../__mocksData__/api.json')
-    return {
-        __esModule: true,
-        ...originalModule,
-        getListOfRestEndPoint: function () {
-            return new Promise((resolve, reject) => {
-                resolve({entity: resp})
-            })
-        },
-    };
+  const originalModule = jest.requireActual('./anapioficeandfire');
+  return {
+    __esModule: true,
+    ...originalModule,
+    getListOfRestEndPoint: () => Promise.resolve({ entity: mockData }),
+    getBookById: (id) => Promise.resolve(mockData.books[id]),
+    getHouseById: (id) => Promise.resolve(mockData.houses.find(house => house.url.endsWith(id))),
+    getHouseByName: (name) => Promise.resolve(mockData.houses.find(house => house.name === name)),
+  };
 });
 
-describe('#getBooks() using Promises', () => {
-    it('should load books data', () => {
-        apiIceAndFire.getListOfRestEndPoint()
-            .then(data => {
-                expect(data.entity.books).toBeDefined()
-                expect(data.entity.books).toEqual('https://www.anapioficeandfire.com/api/books')
-                expect(data.entity.houses).toBeDefined()
-                expect(data.entity.houses).toEqual('https://www.anapioficeandfire.com/api/houses')
-            })
-    })
-})
+describe('API Tests', () => {
+  it('should get book by id', async () => {
+    const bookId = '3';
+    const book = await apiIceAndFire.getBookById(bookId);
+    expect(book).toEqual(mockData.books[bookId]);
+  });
+
+  it('should get list of books and houses', async () => {
+    const data = await apiIceAndFire.getListOfRestEndPoint();
+    expect(data.books).toBeDefined();
+    expect(data.houses).toBeDefined();
+  });
+
+  it('should get house by id', async () => {
+    const houseId = 'house-id'; // Замініть на фактичний ID будинку
+    const house = await apiIceAndFire.getHouseById(houseId);
+    expect(house).toBeDefined();
+  });
+
+  it('should get house by name', async () => {
+    const houseName = 'House Allyrion of Godsgrace';
+    const house = await apiIceAndFire.getHouseByName(houseName);
+    expect(house).toEqual(mockData.houses.find(h => h.name === houseName));
+  });
+});
