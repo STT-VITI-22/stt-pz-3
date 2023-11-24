@@ -3,7 +3,7 @@ import {getBooks, getListOfRestEndPoint} from './api/anapioficeandfire'
 import {useState, useEffect} from "react";
 
 function App() {
-    const [list, setList] = useState({});
+    const [list, setList] = useState([]);
     useEffect(() => {
         getBooks().then(data => {
             setList(data.entity);
@@ -23,13 +23,13 @@ function App() {
                     </a>
                 </h1>
                 <ul className="app-list">
-                    {Object.keys(list).map(key =>
-                        <li className="app-list-item" key={key}><b>{key}</b>:
+                    {list.map(key =>
+                        <li className="app-list-item" key={key.name}>
                             <a className="app-link"
-                               href={list[key]}
+                               href={key.url}
                                target="_blank"
                                rel="noopener noreferrer"
-                            > {list[key]}</a>
+                            > {key.name}</a>
                         </li>)}
                 </ul>
             </section>
