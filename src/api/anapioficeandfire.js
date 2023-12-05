@@ -6,4 +6,4 @@ const request = rest.wrap(mime);
 const getListOfRestEndPoint = () => request(`https://www.anapioficeandfire.com/api`)
 const getBooks = () => request(`https://www.anapioficeandfire.com/api/books`)
 
-export {getListOfRestEndPoint, getBooks}
+module.exports = { getListOfRestEndPoint, getBooks };
