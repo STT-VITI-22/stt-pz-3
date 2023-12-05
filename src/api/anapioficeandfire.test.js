@@ -15,6 +15,12 @@ jest.mock("./anapioficeandfire", () => {
         resolve({ entity: resp });
       });
     },
+    getHouseByName: function (name) {
+      return new Promise((resolve, reject) => {
+          const house = resp.houses.find(house => house.name === name)
+          resolve(house)
+      })
+    },
   };
 });
 
@@ -32,6 +38,7 @@ describe("#getBooks() using Promises", () => {
     });
   });
 });
+
 describe("get Hause by", () => {
   it("should load hauses data", () => {
     apiIceAndFire.getListOfRestEndPoint().then((data) => {
@@ -61,4 +68,15 @@ describe("get Hause for House Allyrion of Godsgrace", () => {
       );
     });
   });
+
+  it('should load house mocked data for name', () => {
+    var name = "House Allyrion of Godsgrace"
+    apiIceAndFire.getHouseByName(name)
+        .then(data => {
+            expect(data.url).toBeDefined()
+            expect(data.name).toEqual(name)
+            expect(data.region).toBeDefined()
+          })
+  });
+
 });
