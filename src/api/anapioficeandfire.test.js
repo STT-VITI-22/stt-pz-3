@@ -42,12 +42,12 @@ describe("get Hause by", () => {
     });
   });
 });
-describe("get Book by id 3", () => {
+describe("get Book by id 4", () => {
   it("should return books for id 3", () => {
     apiIceAndFire.getListOfRestEndPoint().then((data) => {
       expect(data.entity.books3).toBeDefined();
       expect(data.entity.books3).toEqual(
-        "https://www.anapioficeandfire.com/api/books/3"
+        "https://www.anapioficeandfire.com/api/books/4"
       );
     });
   });
