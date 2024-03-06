@@ -1,9 +1,11 @@
-const rest = require('rest');
-const mime = require('rest/interceptor/mime');
+const rest = require("rest");
+const mime = require("rest/interceptor/mime");
 
 const request = rest.wrap(mime);
 
-const getListOfRestEndPoint = () => request(`https://www.anapioficeandfire.com/api`)
-const getBooks = () => request(`https://www.anapioficeandfire.com/api/books`)
+const getListOfRestEndPoint = () =>
+  request(`https://www.anapioficeandfire.com/api`);
 
-export {getListOfRestEndPoint, getBooks}
+const getBooks = () => request(`https://www.anapioficeandfire.com/api/books`);
+
+export { getListOfRestEndPoint, getBooks };
